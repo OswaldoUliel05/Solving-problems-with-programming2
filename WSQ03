@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n1, n2, s, d, p, di, r;
+
+    cout << "Give a number" << endl;
+    cin >> n1;
+
+    cout << "Give another number" << endl;
+    cin >> n2;
+
+    s = n1 + n2;
+    cout << "The sum of the two numbers: " << s << endl;
+
+    d = n1 - n2;
+    cout << "The difference of the two numbers: " << d << endl;
+
+    p = n1 * n2;
+    cout << "The product of the two numbers: " << p << endl;
+
+    di = n1 / n2;
+    cout << "The integer based division of the two numbers: " << di << endl;
+
+    r = n1 % n2;
+    cout << "The remainder of integer division of the two numbers: " << r << endl;
+
+    return 0;
+}
+
