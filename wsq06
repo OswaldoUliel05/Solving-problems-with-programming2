@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+int sec, num, cont =0;
+srand(time(NULL));
+sec = rand()%100+1;
+
+do{
+    cout <<"Please guess a number between 1 and 100: " << endl;
+    cin >> num;
+
+    if (num > sec){
+        cout <<"I am sorry but "<<num<<" is too high, try again: " << endl;
+    }
+    if (num < sec){
+        cout <<"I am sorry but "<<num<<" is too low, try again: "<< endl;
+    }
+cont++;
+}while(num != sec);
+
+    cout <<"You got it! The right answer is indeed "<<num<< endl;
+    cout <<"You made "<<cont<<" guesses to get the right number" <<endl;
+
+return 0;
+}
