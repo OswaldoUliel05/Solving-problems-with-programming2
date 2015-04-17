@@ -1,0 +1,26 @@
+//Oswaldo Uliel Lopez Plascencia
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+long superpower(long a, long b){
+long resultado =pow((a),b);
+ return resultado;
+}
+
+int main()
+{
+    int x,y,z;
+
+    cout << "Ingrese el numero base" << endl;
+    cin >> x;
+
+    cout <<"Ingrese la potencia" << endl;
+    cin >> y;
+
+    z=superpower(x,y);
+
+    cout << "El resultado es: " << z << endl;
+    return 0;
+}
