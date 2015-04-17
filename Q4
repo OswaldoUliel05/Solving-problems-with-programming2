@@ -1,0 +1,31 @@
+//Oswaldo Uliel Lopez PLascencia a01630555
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+
+void isPalindrome( string palabra){
+
+if (equal( palabra.begin(), palabra.begin() + palabra.size()/2, palabra.rbegin())){
+    cout <<"es palindromo"<< endl;
+    }
+else
+cout <<"no es palindromo"<< endl;
+}
+
+
+
+
+int main()
+{
+    string palabra;
+cout<< "Ingresa la palabra" << endl;
+    cin >> palabra;
+
+    isPalindrome(palabra);
+    return 0;
+
+    return 0;
+}
