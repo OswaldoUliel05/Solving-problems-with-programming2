@@ -1,0 +1,25 @@
+//Oswaldo Uliel Lopez Plascencia
+#include<iostream>
+using namespace std;
+int Funcion (int n){
+    double c, f = 0, s = 1, ne;
+    for ( c = 0 ; c < n ; c++ ) {
+        if ( c <= 1 )
+            ne = c;
+        else {
+        ne = f + s;
+        f = s;
+        s = ne;
+        }
+        cout << ne << endl;
+    }
+    return ne;
+}
+main() {
+int t,ne;
+    cout << "Ingrese el numero de terminos" << endl;
+    cin >> t;
+    cout << "Numero de terminos" << t << " Lista: " << endl;
+    ne=Funcion(t);
+return 0;
+}
