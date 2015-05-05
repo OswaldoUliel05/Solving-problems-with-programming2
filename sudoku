@@ -1,0 +1,238 @@
+//Oswaldo Uliel Lopez Plascencia    A01630555
+//Bryant Gerardo Gonzalez Vizcarra  A01228800
+//Sudoku
+#define RESET  "\033[0m"
+#define BLACK  "\033[30m"
+#define RED    "\033[31m"
+#define GREEN  "\033[32m"
+#define PURPLE "\033[35m"
+#define BLUE   "\033[34m"
+#define WHITE  "\033[37m"
+#define BLU    "\033[36m"
+#define YELLOW "\033[33m"fa
+//Ingresamos librerias define para agregar una nueva libreria en la cual pudieramos poner colores
+
+#include <stdio.h>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <math.h>
+#include <stdio.h>
+//Utilizamos estas librerias predeterminadas incluyendo vector, string, cstdlib. Estas librerias nuevas nos ayudaron con nuestro proyecto
+
+using namespace std;
+
+string archivo;
+int sudoku[9][9];
+int prohibido[9][9];
+int nose;
+//Estas variables no definidas sirvieron para todo el programa por lo tanto estan fuera de cualquier funcion para no repetirlas
+
+void leerArchivo(){
+	 FILE* fp;
+  	 fp = fopen(archivo.c_str(),"r");
+	 while (fp==NULL){
+	 	   system("cls");
+	 	   cout<<"Error al abrir el archivo"<<endl;
+		   cout<<"Introdusca el nombre del archivo en la forma archivo.txt"<<endl;
+		   cin>>archivo;
+  	 	   fp = fopen(archivo.c_str(),"r");
+	 }
+	 char car;
+     int N,a,b;
+	 car=getc(fp);
+     a=0;b=0;
+     while (!feof(fp)){
+           N=car;
+		   N=N-48;
+           if ((N>=0)&&(N<=9)){
+           	  sudoku[a][b]=N;
+			  if (N!=0){
+			  	 prohibido[a][b]=1;
+			  }else {
+			  		prohibido[a][b]=0;
+			  }
+			  if (a==8) {
+			  	 a=0;
+				 b++;
+			  } else{
+			  	a++;
+			  }
+		   }
+           car=getc(fp);
+	 }
+     fclose(fp);
+    getchar();
+}
+// Esta funcion void sirve para abrir el archivo de texto y organizar los digitos como se muestran en el archivo
+
+void agregar(int colu, int fila, int num){
+
+	 if (prohibido[colu-1][fila-1] ==1){
+	 	cout<<"El valor de este espacio no se puede cambiar"<<endl;
+	 }else{
+	 	   if (num>=1 && num<=9){
+	 	   	  sudoku[colu-1][fila-1] = num;
+	 	   }else{
+		   		 cout<<"el numero ingresado no es valido"<<endl;
+		   }
+	 }
+}
+//Esta funcion agrega un valor en los lugares que no esten prohibidos
+
+void borrar(int colu, int fila){
+	 if (prohibido[colu-1][fila-1] ==1){
+	 	cout<<"El valor de este espacio no se puede borrar"<<endl;
+	 }else{
+	 	   sudoku[colu-1][fila-1]=0;
+	 }
+}
+//Esta funcion  sirve para eliminar algun numero que ya este agregado
+
+bool conflictofila(int fila, int num){
+	 int i;
+	 bool resul = false;
+	 for (i=0;i<=9;i++){
+	 	 if (sudoku[i][fila] == num){
+		 	resul = true;
+		 }
+	 }
+	 return resul;
+}
+//Esta funcion impide que se agregue un numero repetido dentro de la fila
+
+bool gane(){
+	 int i, j;
+ 	 bool resul;
+	 resul = true;
+	 for (i=0;i<=9;i++){
+	 	 for (j=0;j<=9;j++){
+		 	 if (sudoku[i][j] == 0){
+			 	resul = false;
+			 }
+		 }
+	 }
+	 return resul;
+}
+//Esta funcion verifica que no exita algun 0 dentro del tablero
+
+bool conflictocolu(int colu, int num){
+	 int j;
+	 bool resul = false;
+	 for (j=0;j<=9;j++){
+	 	 if (sudoku[colu][j] == num){
+		 	resul = true;
+		 }
+	 }
+	 return resul;
+}
+//Esta funcion impide que se agregue un numero repetio dentro de la columna
+
+bool conflictocuadro(int colu, int fila, int num){
+	 int i,j;
+	 bool resul = false;
+	 for (i=((colu)*3);i<=(((colu/3)*3)+2);i++){
+	 	 	 for (j=((fila/3)*3);j<=(((fila/3)*3)+2);j++){
+			 	 if (sudoku[i][j] == num){
+		 		 	resul = true;
+		 		 }
+			 }
+	 }
+	 return resul;
+}
+//Esta funcion impide que se agregue un numero repetio dentro del cuadro
+
+
+void imprimir(){
+	 int i,j;
+	 for (j=0;j<=8;j++){
+		 if (j>0&&j%3==0) cout<<endl;
+	 	 for (i=0;i<=8;i++){
+		 	 if (i>0&&i%3==0) cout<<"\t";
+			 if (sudoku[i][j] !=0 && prohibido[i][j]==1){
+			 }else if(sudoku[i][j] !=0){
+			     cout<< RED;
+			 }
+		 	 cout<<" "<<sudoku[i][j];
+		 }
+		 cout<<endl;
+	 }
+	 cout<<endl;
+}
+//Esta funcion imprime los valores del tablero
+
+int main(){
+	string filename;
+	int col, fil, n, op, del;
+	cout<<"Escribe el nombre del archivo (nombre.txt)"<<endl;
+	cin>>filename;
+	archivo=filename;
+    leerArchivo();
+	cout<<endl;
+	while (op!=4){
+		  cout<<"|-------TABLERO-------|"<<endl;
+		  imprimir();
+		  cout<<"que desea hacer?"<<endl;
+		  cout<<"1) Agregar Nuevo Numero\n2) Borrar Numero\n3) Historia\n4) Instrucciones\n5) Salir"<<endl;
+		  cin>>op;
+		  switch (op){
+		  		 case 1:
+				 	  cout<<"columna?"<<endl;
+					  cin>>col;
+					  getchar();
+					  cout<<"fila?"<<endl;
+					  cin>>fil;
+					  getchar();
+					  cout<<"que numero quieres ingresar?"<<endl;
+					  cin>>n;
+					  getchar();
+					  if (conflictofila(fil-1,n) == false && conflictocolu(col-1,n) == false && conflictocuadro(col-1,fil-1,n) == false){
+					  	 agregar(col,fil,n);
+						 cout<<"EXITO!"<<endl;
+						 if (gane()){
+						 	op = 4;
+							cout<<"¡FELICIDADES, TERMINASTE EL RETO DE SUDOKU!"<<endl;
+							imprimir();
+						 }
+					  }else{
+					  		cout<<"Este numero no se puede colocar en esa posicion"<<endl;
+					  }
+					  getchar();
+					  system("cls");
+				 break;
+				 case 2:
+				 	  cout<<"columna?"<<endl;
+					  cin>>col;
+					  getchar();
+					  cout<<"fila?"<<endl;
+					  cin>>fil;
+					  getchar();
+					  cout<<"¿Seguro que quieres elminiarlo? \n1)si\n2)no"<<endl;
+					  cin>>del;
+					  if (del==1){
+					  	 borrar(col,fil);
+						 cout<<"Borrado con exito"<<endl;
+					  }else cout<<"Borrado cancelado"<<endl;
+					  system("cls");
+				 break;
+                case 3:
+                  cout<<"Es un juego matematico que se publico por primera vez a finales de la decada de 1970 y se popularizo en Japon en 1986, dandose a conocer en el ambito internacional en 2005 cuando numerosos periodicos empezaron a publicarlo en su seccion de pasatiempos. "<< endl;
+                  break;
+                  getchar();
+                  system("cls");
+                case 4:
+                  cout<<"Este juego inicia con 3 opciones\n la primera para agregar un numero eligiendo el numero de fila y columna posteriormente agregando el numero que falta, la segunda borra un numero ingresado.\n La tercera muestra la historia del sudoku.";
+                  break;
+				 case 5:
+				 	  return 0;
+				 default:
+				 		 getchar();
+				 		 cout<<"opcion invalida"<<endl;
+						 getchar();
+						 system("cls");
+						 break;
+		  }
+	}
+	system("pause");
+}
