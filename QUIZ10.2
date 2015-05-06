@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int product(int f1[], int f2[], int x)
+{
+    int r=0; 
+    for(int i=0; i<x; i++){
+      cout<<"Ingresa la fila 1"<<endl;
+      cin>>f1[i];
+    }
+    for(int j=0; j<x; j++){
+      cout<<"Ingresa la fila 2"<<endl;
+      cin>>f2[j];
+    }
+    for(int k=0; k<x; k++){
+      r=r+(f1[k]*f2[k]);
+    }
+        return r;
+    }
+int main(){
+    int t;
+    cout<<"Introduce el tamaño de tu producto punto"<<endl;
+    cin>>t;
+    int f1[x];
+    int f2[x];
+    cout<<"El producto punto es: "<<product(f1, f2, t)<<endl;
+    return 0;
+}
