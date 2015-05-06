@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+ 
+void check_banana (string banana){
+ifstream AbrirBanana;
+AbrirBanana.open(banana);
+string col;
+int n = 0;
+ 
+		while(AbrirBanana.tellg() != -1){
+			AbrirBanana >> col;
+			for(int i = 0; i< col.size(); i++){
+				if( (col[i] == 'B' or col[i] == 'b') and
+					(col[i+1] == 'A' or col[i+1] == 'a') and
+					(col[i+2] == 'N' or col[i+2] == 'n') and
+					(col[i+3] == 'A' or col[i+3] == 'a') and
+					(col[i+4] == 'N' or col[i+4] == 'n') and
+					(col[i+5] == 'A' or col[i+5] == 'a') )
+					n++;
+			}
+		}
+		cout<<"Numero de veces que está escrita banana: "<<n<<endl;
+}
+ 
+int main(){
+	check_banana("banana.txt");
+	return 0;
+}
