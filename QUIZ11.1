@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <cmath>
+using namespace std;
+ 
+
+float promedio(float sum, int lines){
+  float promedio;
+  promedio=sum/(lines);
+  return promedio;
+}
+
+float desv( vector<int> v, int tam, int suma){
+  float desviacion;
+  int i;
+  float suma_diferencia =0.0;
+    float prom = promedio(suma, tam);
+  for (i=0; i < tam;i++ ){
+    suma_diferencia += ((v[i] -prom) *(v[i] - prom));
+  }
+  desviacion = sqrt(suma_diferencia/tam);
+  return desviacion;
+} 
+
+void leer(string namefile){
+  ifstream file (namefile); 
+  string line;
+  vector<int> number;
+  int numero_linea=0, suma =0;
+  if (file.is_open()){
+    while (getline(file, line)){
+      int x = atoi(line.c_str());
+      number.push_back(x); 
+      suma += number [numero_linea];
+      numero_linea++;
+    }
+  }
+  cout << "Total e los valores es: "<< suma << endl;
+  cout << "Suma total es:  "<< numero_linea << endl;
+  cout << "Promedio es:  "<< promedio(suma,numero_linea) << endl;
+  cout << "Desviacion estandar: " << desv(number, numero_linea, suma) <<  endl;
+}
+ 
+int main(){
+  leer("random_numbers.txt");
+  return 0;
+}
