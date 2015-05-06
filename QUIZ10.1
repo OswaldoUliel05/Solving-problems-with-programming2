@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int func(int arr[], int l)
+{
+    int suma=0;
+    for (int j=0; j<x; j++){
+      cout<<"Ingresa un numero"<<endl;
+      cin>>arr[j];
+      if((arr[j]%3)==0){
+          suma = suma + arr[j];
+        }
+    }
+    return suma;
+}
+
+int main(){
+    int l;
+    cout<<"Ingresa el tamaño de la lista"<<endl;
+    cin>>l;
+    int arr[l];
+    cout<<"La suma de los números divisibles entre tres es: "<<func(arr, l)<<endl;
+    return 0;
+    }
